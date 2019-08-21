@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:hint="사업자 등록번호를 입력하세요 "
+        android:hint="사업자 등록번호를 입력하세요 (-제외) "
         android:id="@+id/etBRN" />
 
     <LinearLayout

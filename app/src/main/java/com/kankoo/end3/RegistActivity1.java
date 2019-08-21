@@ -170,7 +170,7 @@ public class RegistActivity1 extends Activity {
 
             @Override
             public void onClick(View view) {
-                Intent Intent = new Intent(getApplicationContext(), RegistChoose.class);
+                Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivityForResult(Intent, 100);
             }
         });
