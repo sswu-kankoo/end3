@@ -1,6 +1,7 @@
 package com.kankoo.end3;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,6 +21,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +73,7 @@ public class RegistActivity1 extends Activity {
                 String password = etPassword.getText().toString();
                 String confirm = etPasswordConfirm.getText().toString();
 
-                if( password.equals(confirm) ) {
+                if (password.equals(confirm)) {
                     etPassword.setBackgroundColor(Color.GREEN);
                     etPasswordConfirm.setBackgroundColor(Color.GREEN);
                 } else {
@@ -85,28 +93,28 @@ public class RegistActivity1 extends Activity {
             public void onClick(View v) {
 
                 // 아이디 입력 확인
-                if( etID.getText().toString().length() == 0 ) {
+                if (etID.getText().toString().length() == 0) {
                     Toast.makeText(RegistActivity1.this, "아이디를 입력하세요!", Toast.LENGTH_SHORT).show();
                     etID.requestFocus();
                     return;
                 }
 
                 // 비밀번호 입력 확인
-                if( etPassword.getText().toString().length() == 0 ) {
+                if (etPassword.getText().toString().length() == 0) {
                     Toast.makeText(RegistActivity1.this, "비밀번호를 입력하세요!", Toast.LENGTH_SHORT).show();
                     etPassword.requestFocus();
                     return;
                 }
 
                 // 비밀번호 확인 입력 확인
-                if( etPasswordConfirm.getText().toString().length() == 0 ) {
+                if (etPasswordConfirm.getText().toString().length() == 0) {
                     Toast.makeText(RegistActivity1.this, "비밀번호를 재입력하세요!", Toast.LENGTH_SHORT).show();
                     etPasswordConfirm.requestFocus();
                     return;
                 }
 
                 // 비밀번호 일치 확인
-                if( !etPassword.getText().toString().equals(etPasswordConfirm.getText().toString()) ) {
+                if (!etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())) {
                     Toast.makeText(RegistActivity1.this, "비밀번호가 일치하지 않습니다!", Toast.LENGTH_SHORT).show();
                     etPassword.setText("");
                     etPasswordConfirm.setText("");
@@ -122,25 +130,29 @@ public class RegistActivity1 extends Activity {
                 } */
 
                 // 이름 입력 확인
-                if( etPersonName.getText().toString().length() == 0 ) {
+                if (etPersonName.getText().toString().length() == 0) {
                     Toast.makeText(RegistActivity1.this, "이름을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etPersonName.requestFocus();
                     return;
                 }
 
                 // 학번 입력 확인
-                if( etStudentID.getText().toString().length() == 0 ) {
+                if (etStudentID.getText().toString().length() == 0) {
                     Toast.makeText(RegistActivity1.this, "학번을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etStudentID.requestFocus();
                     return;
                 }
 
+                /*
                 Intent result = new Intent();
                 result.putExtra("이메일", etID.getText().toString());
 
                 // 자신을 호출한 엑티비티로 데이터를 보낸다.
                 setResult(RESULT_OK, result);
                 finish();
+
+                */
+
             }
         });
 
@@ -158,7 +170,7 @@ public class RegistActivity1 extends Activity {
         //리스트에 검색될 데이터 추가
         settingList();
 
-        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.etMajor);
+        final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.etMajor);
 
         //AutoCompleteTextView에 어답터 연결
         autoCompleteTextView.setAdapter(new ArrayAdapter<String>(this,
@@ -170,11 +182,49 @@ public class RegistActivity1 extends Activity {
 
             @Override
             public void onClick(View view) {
-                Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivityForResult(Intent, 100);
+                String user1_id = etID.getText().toString();
+                String user1_pw = etPassword.getText().toString();
+                String user1_mj = autoCompleteTextView.getText().toString();
+                String user1_name = etPersonName.getText().toString();
+                String user1_stID = etStudentID.getText().toString();
+
+                if (user1_id.equals("") || user1_pw.equals("") || user1_mj.equals("") || user1_name.equals("") || user1_stID.equals("")) {
+                    Toast.makeText(RegistActivity1.this, "빈칸 없이 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                Toast.makeText(RegistActivity1.this, "회원등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegistActivity1.this, "회원등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                Regist1Request regist1Request = new Regist1Request(user1_id, user1_pw, user1_mj, user1_name, user1_stID, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegistActivity1.this);
+                queue.add(regist1Request);
+
+
+                //Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivityForResult(Intent, 100);
             }
         });
     }
+
+
+
 
     //리스트 추가
     private void settingList(){
@@ -251,4 +301,4 @@ public class RegistActivity1 extends Activity {
         String text="안녕하세요? "+ this.etPersonName.getText().toString();
         Toast.makeText(this, text,Toast.LENGTH_LONG).show();
         } */
-    }
+}
