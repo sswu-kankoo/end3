@@ -1,6 +1,7 @@
 package com.kankoo.end3;
 
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.os.AsyncTask;
@@ -69,14 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 user1_id = etEmail.getText().toString();
                 user1_pw = etPassword.getText().toString();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
-
                     @Override
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
                             boolean success = jsonResponse.getBoolean("success");
                             if(success){
-                                Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                                 user1_id = jsonResponse.getString("user1_id");
                                 user1_pw = jsonResponse.getString("user1_pw");
                                 Intent intent = new Intent(MainActivity.this, RegistChoose.class);
