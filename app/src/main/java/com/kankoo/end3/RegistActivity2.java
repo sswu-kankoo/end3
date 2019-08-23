@@ -79,11 +79,10 @@ public class RegistActivity2 extends Activity {
                 String confirm = etPasswordConfirm.getText().toString();
 
                 if (password.equals(confirm)) {
-                    etPassword.setBackgroundColor(Color.GREEN);
                     etPasswordConfirm.setBackgroundColor(Color.GREEN);
                 } else {
-                    etPassword.setBackgroundColor(Color.RED);
-                    etPasswordConfirm.setBackgroundColor(Color.RED);
+                    etPasswordConfirm.setBackgroundColor(Color.rgb(250,105,76));
+                    Toast.makeText(RegistActivity2.this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show();
                 }
             }
 

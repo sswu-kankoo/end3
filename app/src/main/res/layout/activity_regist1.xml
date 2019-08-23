@@ -11,81 +11,100 @@
         android:id="@+id/textView"
         android:layout_width="310dp"
         android:layout_height="60dp"
+        android:gravity="center"
         android:text="학생 회원가입"
-        android:gravity="center" />
+        android:textColor="#fb816a"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="match_parent"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginTop="10dp"
         android:hint="성신 이메일을 입력하세요"
+        android:gravity="center_horizontal"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etPassword"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="비밀번호를 입력하세요"
-        android:id="@+id/etPassword" />
+        android:inputType="textPassword" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etPasswordConfirm"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="비밀번호를 재입력하세요"
-        android:id="@+id/etPasswordConfirm" />
+        android:inputType="textPassword" />
 
 
     <AutoCompleteTextView
-        android:layout_width="match_parent"
+        android:id="@+id/etMajor"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:textColorHint="#555555"
         android:completionThreshold="1"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="학과 이름 전체를 입력하세요 "
-        android:id="@+id/etMajor" >
+        android:textColorHint="#555555">
 
     </AutoCompleteTextView>
 
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etPersonName"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="이름을 입력하세요 "
-        android:id="@+id/etPersonName" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etStudentID"
-        android:layout_width="match_parent"
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="center_horizontal"
         android:hint="학번을 입력하세요 "
         android:inputType="number" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_width="284dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
 
         <Button
             android:id="@+id/btnEmailAuth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="입력" />
+            android:backgroundTint="#E6ECE8"
+            android:text="가입"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btnCancel"
-            android:text="취소"
+            android:layout_width="34dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:backgroundTint="#E6ECE8"
+            android:text="취소"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

@@ -12,67 +12,86 @@
         android:layout_width="310dp"
         android:layout_height="60dp"
         android:text="사업자 회원가입"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="#fb816a"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/etEmail"
-        android:layout_width="match_parent"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginTop="10dp"
         android:hint="아이디로 사용할 이메일 주소를 입력하세요"
+        android:gravity="center_horizontal"
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etPassword"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
         android:hint="비밀번호를 입력하세요"
-        android:id="@+id/etPassword" />
+        android:gravity="center_horizontal"
+        android:inputType="textPassword" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etPasswordConfirm"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:ems="10"
         android:hint="비밀번호를 재입력하세요"
-        android:id="@+id/etPasswordConfirm" />
+        android:gravity="center_horizontal"
+        android:inputType="textPassword" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etShopName"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:ems="10"
         android:hint="가게 명을 입력하세요 "
-        android:id="@+id/etShopName" />
+        android:gravity="center_horizontal"
+        android:inputType="text" />
 
     <EditText
-        android:layout_width="match_parent"
+        android:id="@+id/etBRN"
+        android:layout_width="328dp"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:ems="10"
         android:hint="사업자 등록번호를 입력하세요 (-제외) "
-        android:id="@+id/etBRN" />
+        android:gravity="center_horizontal"
+        android:inputType="number" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_width="289dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:text="가입" />
+            android:backgroundTint="#E6ECE8"
+            android:text="가입"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btnCancel"
-            android:text="취소"
+            android:layout_width="34dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:backgroundTint="#E6ECE8"
+            android:text="취소"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
