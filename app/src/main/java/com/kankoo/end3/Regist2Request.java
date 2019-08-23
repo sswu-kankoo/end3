@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Regist2Request extends StringRequest {
 
-    final static private String URL = "http://localhost/user2register.php";
+    final static private String URL = "http://10.0.2.2:80/user2register.php";
     private Map<String, String> parameters;
     //private Map<String,Integer> parameters1;
 

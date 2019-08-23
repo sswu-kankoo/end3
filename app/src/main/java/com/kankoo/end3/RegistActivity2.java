@@ -148,14 +148,6 @@ public class RegistActivity2 extends Activity {
                 }
 
 
-                /*
-                Intent result = new Intent();
-                result.putExtra("이메일", etID.getText().toString());
-
-                // 자신을 호출한 엑티비티로 데이터를 보낸다.
-                setResult(RESULT_OK, result);
-                finish();                */
-
                 if (user2_id.equals("") || user2_pw.equals("") || user2_ShopName.equals("") || user2_BRN.equals("")) {
                     Toast.makeText(RegistActivity2.this, "빈칸 없이 입력해주세요", Toast.LENGTH_SHORT).show();
                     return;
@@ -188,6 +180,13 @@ public class RegistActivity2 extends Activity {
                 RequestQueue queue = Volley.newRequestQueue(RegistActivity2.this);
                 queue.add(regist2Request);
 
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
