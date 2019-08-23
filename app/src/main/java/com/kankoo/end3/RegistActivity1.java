@@ -43,12 +43,19 @@ public class RegistActivity1 extends Activity {
     private Button btnEmailAuth;
     private Button btnCancel;
 
+    private String user1_id;
+    private String user1_pw;
+    private String user1_mj;
+    private String user1_name;
+    private String user1_stID;
+
     private List<String> list; //데이터를 넣은 리스트 변수
 
     private MultiAutoCompleteTextView textProgrammingLanguage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist1);
 
@@ -60,6 +67,18 @@ public class RegistActivity1 extends Activity {
 
         btnEmailAuth = (Button) findViewById(R.id.btnEmailAuth);
         btnCancel = (Button) findViewById(R.id.btnCancel);
+
+        //리스트 생성
+        list = new ArrayList<String>();
+
+        //리스트에 검색될 데이터 추가
+        settingList();
+
+        final AutoCompleteTextView etMajor = findViewById(R.id.etMajor);
+
+        //AutoCompleteTextView에 어댑터 연결
+        etMajor.setAdapter(new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, list));
 
         // 비밀번호 일치 검사
         etPasswordConfirm.addTextChangedListener(new TextWatcher() {
@@ -92,15 +111,21 @@ public class RegistActivity1 extends Activity {
             @Override
             public void onClick(View v) {
 
+                user1_id = etID.getText().toString();
+                user1_pw = etPassword.getText().toString();
+                user1_mj = etMajor.getText().toString();
+                user1_name = etPersonName.getText().toString();
+                user1_stID = etStudentID.getText().toString();
+
                 // 아이디 입력 확인
-                if (etID.getText().toString().length() == 0) {
+                if (user1_id.length() == 0) {
                     Toast.makeText(RegistActivity1.this, "아이디를 입력하세요!", Toast.LENGTH_SHORT).show();
                     etID.requestFocus();
                     return;
                 }
 
                 // 비밀번호 입력 확인
-                if (etPassword.getText().toString().length() == 0) {
+                if (user1_pw.length() == 0) {
                     Toast.makeText(RegistActivity1.this, "비밀번호를 입력하세요!", Toast.LENGTH_SHORT).show();
                     etPassword.requestFocus();
                     return;
@@ -122,22 +147,22 @@ public class RegistActivity1 extends Activity {
                     return;
                 }
 
-                /* 전공 입력 확인
-                if( etMajor.getText().toString().length() == 0 ) {
+                //전공입력확인
+                if( user1_mj.length() == 0 ) {
                     Toast.makeText(RegistActivity1.this, "전공을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etMajor.requestFocus();
                     return;
-                } */
+                }
 
                 // 이름 입력 확인
-                if (etPersonName.getText().toString().length() == 0) {
+                if (user1_name.length() == 0) {
                     Toast.makeText(RegistActivity1.this, "이름을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etPersonName.requestFocus();
                     return;
                 }
 
                 // 학번 입력 확인
-                if (etStudentID.getText().toString().length() == 0) {
+                if (user1_stID.length() == 0) {
                     Toast.makeText(RegistActivity1.this, "학번을 입력하세요!", Toast.LENGTH_SHORT).show();
                     etStudentID.requestFocus();
                     return;
@@ -149,9 +174,42 @@ public class RegistActivity1 extends Activity {
 
                 // 자신을 호출한 엑티비티로 데이터를 보낸다.
                 setResult(RESULT_OK, result);
-                finish();
+                finish();                */
 
-                */
+                if (user1_id.equals("") || user1_pw.equals("") || user1_mj.equals("") || user1_name.equals("") || user1_stID.equals("")) {
+                    Toast.makeText(RegistActivity1.this, "빈칸 없이 입력해주세요", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            boolean success = jsonResponse.getBoolean("success");
+                            if (success) {
+                                Toast.makeText(RegistActivity1.this, "회원등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                                Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivityForResult(Intent, 100);
+                            } else {
+                                Toast.makeText(RegistActivity1.this, "회원등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
+                                startActivityForResult(Intent, 100);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                Regist1Request regist1Request = new Regist1Request(user1_id, user1_pw, user1_mj, user1_name, user1_stID, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(RegistActivity1.this);
+                queue.add(regist1Request);
+
+
+
 
             }
         });
@@ -164,63 +222,12 @@ public class RegistActivity1 extends Activity {
         });
 
 
-        //리스트 생성
-        list = new ArrayList<String>();
-
-        //리스트에 검색될 데이터 추가
-        settingList();
-
-        final AutoCompleteTextView autoCompleteTextView = findViewById(R.id.etMajor);
-
-        //AutoCompleteTextView에 어답터 연결
-        autoCompleteTextView.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, list));
-
-        // 디비 저장하고, 메인엑티비티 화면으로 전환
-        Button btnEmailAuth = (Button) findViewById(R.id.btnEmailAuth);
-        btnEmailAuth.setOnClickListener(new View.OnClickListener() {
-
+/*
             @Override
             public void onClick(View view) {
-                String user1_id = etID.getText().toString();
-                String user1_pw = etPassword.getText().toString();
-                String user1_mj = autoCompleteTextView.getText().toString();
-                String user1_name = etPersonName.getText().toString();
-                String user1_stID = etStudentID.getText().toString();
-
-                if (user1_id.equals("") || user1_pw.equals("") || user1_mj.equals("") || user1_name.equals("") || user1_stID.equals("")) {
-                    Toast.makeText(RegistActivity1.this, "빈칸 없이 입력해주세요", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
-                            boolean success = jsonResponse.getBoolean("success");
-                            if (success) {
-                                Toast.makeText(RegistActivity1.this, "회원등록에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegistActivity1.this, "회원등록에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                };
-                Regist1Request regist1Request = new Regist1Request(user1_id, user1_pw, user1_mj, user1_name, user1_stID, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(RegistActivity1.this);
-                queue.add(regist1Request);
-
-
-                //Intent Intent = new Intent(getApplicationContext(),MainActivity.class);
-                //startActivityForResult(Intent, 100);
+//잘라내기부분
             }
-        });
+        }); */
     }
 
 
