@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/OwnerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="사장님"
+        android:textColor="#FB816A"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnReadQR"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="#E6ECE8"
+            android:text="QR코드 스캔"
+            android:textSize="15sp" />
+        <!--android:layout_marginRight="10dp" -->
+
+
+        <!--
+                <Button
+                    android:id="@+id/btnManageQR"
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="#E6ECE8"
+                    android:text="거래 목록"
+                    android:textSize="15sp"
+                    android:onClick="Maechul_onClick"/>
+                    -->
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

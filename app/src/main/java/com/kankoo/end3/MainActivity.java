@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
                                 user1_id = jsonResponse.getString("user1_id");
                                 user1_pw = jsonResponse.getString("user1_pw");
-                                Intent intent = new Intent(MainActivity.this, RegistChoose.class);
+                                Intent intent = new Intent(MainActivity.this, mainpage1.class);
                                 MainActivity.this.startActivity(intent);
                                 finish();
                             } else {
