@@ -15,15 +15,15 @@ public class mainpage1 extends AppCompatActivity {
         setContentView(R.layout.activity_mainpage1);
     }
 
-    public void ViewQR_onClick(View v) {
-        intent.putExtra("result", "내 간쿠 보기-> 서버 연결?");
-        setResult(RESULT_OK, intent);
+    public void ViewQR_onClick(View v){
+        Intent Intent = new Intent(getApplicationContext(), ViewQR.class);
+        startActivityForResult(Intent, 100);
         finish();
     }
 
     public void ExchangeQR_onClick(View v) {
-        intent.putExtra("result", "간쿠 교환?");
-        setResult(RESULT_OK, intent);
+        Intent Intent = new Intent(getApplicationContext(), ExchangeQR.class);
+        startActivityForResult(Intent, 100);
         finish();
     }
 

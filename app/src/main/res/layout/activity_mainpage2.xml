@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Button
             android:id="@+id/btnReadQR"
             android:layout_width="110dp"
@@ -28,22 +29,22 @@
             android:layout_marginTop="25dp"
             android:backgroundTint="#E6ECE8"
             android:text="QR코드 스캔"
-            android:textSize="15sp" />
-        <!--android:layout_marginRight="10dp" -->
+            android:textSize="15sp"
+            android:layout_marginRight="15dp"
+            android:onClick="ReadQR_onClick"/>
 
 
-        <!--
-                <Button
-                    android:id="@+id/btnManageQR"
-                    android:layout_width="110dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginLeft="10dp"
-                    android:backgroundTint="#E6ECE8"
-                    android:text="거래 목록"
-                    android:textSize="15sp"
-                    android:onClick="Maechul_onClick"/>
-                    -->
+        <Button
+            android:id="@+id/btnManageQR"
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            android:backgroundTint="#E6ECE8"
+            android:text="거래 목록"
+            android:textSize="15sp"
+            android:onClick="ManageQR_onClick"/>
+
 
     </LinearLayout>
 
