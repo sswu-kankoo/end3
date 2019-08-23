@@ -48,14 +48,18 @@ public class MakeQR extends AppCompatActivity {
         //String text = result;
 
         TextView textView1 = (TextView) findViewById(R.id.text1);
+        String nxtline = "\n";
 
         for (int i = 1; i < num2 + 1; i++) {
             textView1.setText(Arrays.toString(after));
+            System.out.println(nxtline);
+
+
+
         }
 
         for (int i = 1; i < num2 + 1; i++) {
             String text = after[i - 1];
-
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
             try {
